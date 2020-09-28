@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 // void main() {
 //   runApp(MyBrilliantApp());
 // }
@@ -10,19 +12,19 @@ class MyBrilliantApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyBrilliantAppState();
+    return _MyBrilliantAppState();
   }
 }
 
-class MyBrilliantAppState extends State<MyBrilliantApp> {
-  var questionIndex = 0;
+class _MyBrilliantAppState extends State<MyBrilliantApp> {
+  var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _answerQuestion() {
     // re-render after pressed button
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   @override
@@ -38,12 +40,12 @@ class MyBrilliantAppState extends State<MyBrilliantApp> {
         ),
         body: Column(
           children: [
-            Text(
-              questions[questionIndex],
+            Question(
+              questions[_questionIndex],
             ),
             RaisedButton(
               child: Text('Answwer 1'),
-              onPressed: answerQuestion,
+              onPressed: _answerQuestion,
             ),
             RaisedButton(
               child: Text('Answwer 2'),
