@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 // void main() {
 //   runApp(MyBrilliantApp());
@@ -29,10 +30,26 @@ class _MyBrilliantAppState extends State<MyBrilliantApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?'
+    const questions = [
+      {
+        'questionText': 'What\'s your favorite color?',
+        'answers': ['Black', 'Red', 'Green', 'White'],
+      },
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      },
+      {
+        'questionText': 'Who\'s your favorite instructor?',
+        'answers': ['Ben', 'Ben', 'Ben', 'Ben'],
+      },
     ];
+
+    // var dummy = const ['Hello'];
+    // dummy.add('Ben');
+    // print(dummy);
+    // dummy = [];
+    // question = [];  // does not work if questions is a const
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -41,23 +58,12 @@ class _MyBrilliantAppState extends State<MyBrilliantApp> {
         body: Column(
           children: [
             Question(
-              questions[_questionIndex],
+              questions[_questionIndex]['questionText'],
             ),
-            RaisedButton(
-              child: Text('Answwer 1'),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text('Answwer 2'),
-              onPressed: () => print('Answer 2 chosen!'),
-            ),
-            RaisedButton(
-              child: Text('Answwer 3'),
-              onPressed: () {
-                // ...
-                print('Answer 3 chosen');
-              },
-            ),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
